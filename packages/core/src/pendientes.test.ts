@@ -18,6 +18,7 @@ function mov(parcial: Partial<MovimientoSiaf>): MovimientoSiaf {
     fechaDoc: null,
     fechaAprobacion: null,
     fechaProceso: null,
+    fechaDbOracle: null,
     tipoOperacion: null,
     estRegistro: 'A',
     tipoRegistro: 'N',

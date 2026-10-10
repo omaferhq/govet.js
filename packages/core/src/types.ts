@@ -25,6 +25,8 @@ export interface MovimientoSiaf {
   fechaDoc: Date | null;
   fechaAprobacion: Date | null;
   fechaProceso: Date | null;
+  /** "Fecha DB Oracle": cuándo se grabó el registro en la base del SIAF (solo la fecha, sin la hora). */
+  fechaDbOracle: Date | null;
 
   tipoOperacion: string | null;
   estRegistro: string | null;

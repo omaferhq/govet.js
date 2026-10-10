@@ -23,7 +23,12 @@ npm install govet govet-pe
   No sabe nada de Perú, CSV, ni archivos — solo trabaja con datos ya
   normalizados.
 - **`govet-pe`** — el driver para Perú. Parsea el CSV que exporta el
-  SIAF (Formato A) y lo convierte al contrato que espera `govet`.
+  SIAF (Formato A) y lo convierte al contrato que espera `govet`. También
+  lee el **Reporte de Gasto** (marco presupuestal: PIA, PIM, certificado,
+  compromiso anual y ejecución mensual, con el nombre de cada código) y el
+  reporte de **Certificación y Compromiso Anual** (`parseReporteGasto`,
+  `parseCertificaciones`; reciben las filas de la hoja como arreglo de
+  arreglos, por ejemplo de SheetJS con `header: 1`).
 
 La idea: un país nuevo (o un formato nuevo) solo necesita escribir su propio
 driver que produzca `MovimientoSiaf[]`. El core nunca cambia.
@@ -77,7 +82,10 @@ Formato A (incluye cabeceras multilínea entre comillas, montos con signo
 negativo al final, y reconciliación de totales). El parser lee las 67
 columnas del Formato A completo y los datos del encabezado del reporte
 (Sector, Pliego, Ejecutora, Periodo, Fecha…); cada fila de Pendientes y de
-Ejecución Detallada trae su `movimiento` de origen.
+Ejecución Detallada trae su `movimiento` de origen. `govet-pe` también lee
+el Reporte de Gasto y Certificación y Compromiso Anual, con los modelos
+645/646 (certificado vs. compromiso anual y certificados con saldo por
+comprometer, solo lo aprobado: sus totales cuadran con el Reporte de Gasto).
 
 Pendiente: catálogo de `Cod. Doc.`, Web Worker para archivos grandes
 (60-70k filas), agregación de varios meses, y el "rastro" completo de las

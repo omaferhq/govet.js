@@ -132,6 +132,7 @@ export function parseFormatoA(textoCrudo: string): ResultadoParseo {
       fechaDoc: parseFechaSiaf(get(fila, 'fechaDoc')),
       fechaAprobacion: parseFechaSiaf(get(fila, 'fechaAprobacion')),
       fechaProceso: parseFechaSiaf(get(fila, 'fechaProceso')),
+      fechaDbOracle: parseFechaSiaf((txt(get(fila, 'fechaDbOracle')) ?? '').slice(0, 10)),
       tipoOperacion: get(fila, 'tipoOperacion') ?? null,
       estRegistro: get(fila, 'estRegistro') ?? null,
       tipoRegistro: get(fila, 'tipoRegistro') ?? null,

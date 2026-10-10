@@ -72,7 +72,7 @@ export interface OpcionesPendiente {
   estadosValidos?: string[] | null;
 }
 
-const ESTADOS_VALIDOS_DEFAULT = ['A'];
+export const ESTADOS_VALIDOS_DEFAULT = ['A'];
 
 /**
  * Catálogo oficial de "Est Registro" del Formato A, confirmado el 2026-09-29
@@ -311,8 +311,9 @@ export function ejecucionDetallada(
       (a, b) =>
         a.expediente.localeCompare(b.expediente) ||
         ORDEN_FASE.indexOf(a.fase) - ORDEN_FASE.indexOf(b.fase) ||
-        (a.subRegistro ?? '').localeCompare(b.subRegistro ?? '') ||
-        (a.movimiento.correlativo ?? '').localeCompare(b.movimiento.correlativo ?? '')
+        // Como números: la secuencia 10 va después de la 9.
+        (a.subRegistro ?? '').localeCompare(b.subRegistro ?? '', undefined, { numeric: true }) ||
+        (a.movimiento.correlativo ?? '').localeCompare(b.movimiento.correlativo ?? '', undefined, { numeric: true })
     );
 }
 
